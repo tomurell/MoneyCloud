@@ -1,11 +1,8 @@
-//
-
-
 var exo3;
 var exo4;
 var exo5;
 var exo6;
-var introTxt = "Shown here are investments in the top 200 companies as recorded in the CrunchBase \narchive through 2013 [crunchbase.com], using p5.js [p5js.org].\n\n> Company bubbles are color-coded by category; sized by total amount of investment.\n\n> Investors (bars along the bottom) are shown sized by total amount invested.\n\nPrepared as coursework for ARTG5330  //  april 2016 \n\ninformation design + visualization  //  northeastern university\n\nthomas urell [github.com/tomurell]"
+var introTxt = "Shown here are investments in the top 200 companies as recorded in the CrunchBase \narchive through 2013 [crunchbase.com], using p5.js [p5js.org].\n\n> Company bubbles are color-coded by category; sized by total amount of investment.\n\n> Investors (bars along the bottom) are shown sized by total amount invested.\n\nPrepared as coursework for ARTG5330  //  April 2016 \n\nInformation Design + Visualization  //  Northeastern University\n\nThomas Urell [github.com/tomurell]"
 var companySystem = [];
 var investorSystem = [];
 var attractors = [];
@@ -163,6 +160,7 @@ function setup() {
 
     var atR = new Attractor(createVector(width * .9, height * .4), 84);
     attractors.push(atR);
+    
 
 }
 
@@ -219,7 +217,7 @@ function draw() {
 function introBox() {
     var mouseBox = false;
     var mouseEye = false;
-    var closeBoxPos = createVector(width / 2 - 60, height / 2 + 100);
+    var closeBoxPos = createVector(width / 2 - 60, height / 2 + 90);
     var infoBoxPos = createVector(width * 0.025, height * 0.025);
 
     function mouseOnBox() {
@@ -257,23 +255,23 @@ function introBox() {
         
         noStroke();
         fill(200, 0, 100, 100);
-        rect(width / 2 - 310
-            , height / 2 - 240
-            , 620
-            , 400
+        rect(width / 2 - 360
+            , height / 2 - 320
+            , 720
+            , 480
             , 2);
 
         textAlign(CENTER, TOP);
         textFont(exo3);
-        textSize(48);
+        textSize(72);
         fill(200, 25, 40, 100);
-        text("Money Cloud", width / 2, height / 2 - 220);
+        text("Money Cloud", width / 2, height / 2 - 310);
 
-        textAlign(LEFT, TOP);
+        textAlign(CENTER, TOP);
         textFont(exo4);
-        textSize(14);
+        textSize(16);
         fill(200, 25, 40, 100);
-        text(introTxt, width / 2 - 280, height / 2 - 140);
+        text(introTxt, width / 2, height / 2 - 190);
 
         mouseOnBox();
 
@@ -284,7 +282,7 @@ function introBox() {
 
             textAlign(CENTER, CENTER);
             textFont(exo5);
-            textSize(14);
+            textSize(16);
             fill(200, 0, 100, 100);
             text("Ok, close it!", width / 2, closeBoxPos.y + 20);
         } else {
@@ -294,7 +292,7 @@ function introBox() {
 
             textAlign(CENTER, CENTER);
             textFont(exo5);
-            textSize(14);
+            textSize(16);
             fill(200, 25, 40, 100);
             text("Ok, close it!", width / 2, closeBoxPos.y + 20);
         }
@@ -306,7 +304,7 @@ function introBox() {
 
             textAlign(CENTER, CENTER);
             textFont(exo5);
-            textSize(14);
+            textSize(16);
             fill(200, 0, 100, 100);
             text("info", infoBoxPos.x + 28, infoBoxPos.y + 14);
         } else {
@@ -316,7 +314,7 @@ function introBox() {
 
             textAlign(CENTER, CENTER);
             textFont(exo5);
-            textSize(14);
+            textSize(16);
             fill(200, 0, 100, 100);
             text("info", infoBoxPos.x + 28, infoBoxPos.y + 14);
         }
@@ -396,28 +394,28 @@ var Company = function (name, sum, category, cnum) {
                 , maxRadius
                 , maxRadius);
             textFont(exo5);
-            textSize(12);
+            textSize(16);
             var dispSum = nfc(this.sum / 1000000000, 2);
             text("$" + dispSum + "B", this.pos.x, this.pos.y + 66);
 
             textFont(exo5);
-            textSize(12);
+            textSize(16);
             text(this.category, this.pos.x, this.pos.y + 50);
             
             textAlign(LEFT, BOTTOM);
             textFont(exo4);
-            textSize(18);
+            textSize(24);
             fill(200, 25, 40, 100);
             text(this.name
                  , width * 0.025
                  , height * 0.25 - 32);
             
             textFont(exo6);
-            textSize(10);
+            textSize(12);
             fill(200, 25, 40, 100);
             text("INVESTMENTS"
                  , width * 0.025
-                 , height * 0.25 - 16);
+                 , height * 0.25 - 18);
 
             if (doOnce) {
                 getInvestorParticles(this.name);
@@ -432,6 +430,7 @@ var Company = function (name, sum, category, cnum) {
             highlightInv.forEach(function (h) {
                 h.update();
                 h.draw();
+                
             });
 
         } else {
@@ -449,8 +448,6 @@ var Company = function (name, sum, category, cnum) {
             }
         }
         
-        print(investorDisplay);
-
         for (var j = 0; j < investorDisplay.length; j++) {
             var h = new Highlight(investorDisplay[j].investor.iname
                                 , investorDisplay[j].amount
@@ -507,7 +504,7 @@ var Highlight = function (iname, amount, date, compName, seqNum) {
     this.amount = amount;
     this.date = date;
     this.dispAmt = nfc(this.amount/1000000, 0);
-    this.seqNum = seqNum * 12;
+    this.seqNum = seqNum * 16;
     this.opacity = 10;
     var maxOp = 95;
 
@@ -526,7 +523,7 @@ var Highlight = function (iname, amount, date, compName, seqNum) {
             , this.boxSize.y);
 
         textAlign(LEFT);
-        textSize(10);
+        textSize(14);
         textFont(exo4);
         fill(200, 25, 40, 100);
         text(this.date + " : " + this.iname + " : $" + this.dispAmt + "M"
@@ -655,14 +652,14 @@ var investorBar = function (iname, totalInv) {
             if (mouseIsPressed) {
                 noStroke();
                 textFont(exo3);
-                textSize(16);
+                textSize(20);
                 fill(200, 25, 40, 100);
-                text(this.iname, this.pos.x, this.pos.y - 18);
+                text(this.iname, this.pos.x, this.pos.y - 24);
                 
                 textFont(exo5);
-                textSize(10);
+                textSize(14);
                 fill(200, 25, 40, 100);
-                text("$" + nfc(this.dispInv, 2) + "B", this.pos.x, this.pos.y - 4);
+                text("$" + nfc(this.dispInv, 2) + "B", this.pos.x, this.pos.y - 6);
                 
             }
             
